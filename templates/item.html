@@ -1,0 +1,44 @@
+{% include "header.html" %}
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+<div class="container" style="background-color:#FFF;">
+
+	<div class="row">
+		<div class="col-md-4 padding-top-5" style="border-right:1px solid #F1F1F1">
+			<h5>{{ category.name }}</h5>
+			{% if 'username' in session %}
+			<a href = "{{url_for('deleteCategory', category_id=category.id)}}">
+					<button class="btn btn-danger">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Category
+                    </button>
+				</a>
+			{% endif %}
+		</div>
+		<div class="col-md-8 padding-top-5">
+			<h5>Items</h5>
+			<ul class="list-unstyled">
+				{% if 'username' in session %}
+				<a href = "{{url_for('newItem')}}">
+					<button class="btn btn-default">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+                    </button>
+				</a>
+				{% endif %}
+				{% for item in items %}
+				<li><a href="{{url_for('viewDetails', category_id = item.category.id, item_id = item.id)}}">{{ item.name }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>

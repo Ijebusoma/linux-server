@@ -1,0 +1,19 @@
+
+{% include "header.html" %}
+<div class="container" style="background-color:#FFF;">
+	<div class="row">
+		<div class="col-md-12">
+			<h5>Create Category</h5>
+			<form action="{{url_for('newCategory')}}" method = "post">
+				<div class="form-group">
+					<label>Name:</label>
+					<input type ="text" maxlength="100" class="form-control" name="name" value="">
+
+					<button type="submit" class="btn btn-default" id="submit" type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+				</div>
+			</form>
+
+		</div>
+		</div>
+	</div>

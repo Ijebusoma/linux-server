@@ -1,0 +1,342 @@
+{% include "header.html" %}
+
+
+		<section class="categories-section padding-top-70 padding-bottom-40">
+			<div class="container"><!-- section container -->
+				<div class="section-title-wrap margin-bottom-50"><!-- section title -->
+					<h4>Featured Listing</h4>
+					<div class="title-divider">
+						<div class="line"></div>
+						<i class="fa fa-star-o"></i>
+						<div class="line"></div>
+					</div>
+				</div><!-- section title end -->
+				<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+				<div class="row category-section-wrap cat-style-2">
+
+					<div class="col-md-6"><!-- category column -->
+
+						<div class="cat-wrap shadow-1">
+							<h5><i class="">Categories</i></h5>
+							<div class="cat-list-wrap">
+								<ul class="cat-list">
+                                     {% for category in categories %}
+									<li><a href="{{url_for('getItems', category_id=category.id)}}">{{category.name}}<span></span></a></li>
+									{% endfor %}
+
+
+								</ul>
+
+							</div>
+						</div>
+
+					</div><!-- category column end -->
+
+
+
+					<div class="row category-section-wrap cat-style-2">
+
+					<div class="col-md-6"><!-- category column -->
+
+						<div class="cat-wrap shadow-1">
+							<h5><i class=""></i>Coolest Sports</h5>
+							{% if 'username' in session %}
+							<a href = "{{url_for('newItem')}}">
+					<button class="btn btn-default">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+                    </button>
+				</a>
+							{% endif %}
+							<div class="cat-list-wrap">
+								<ul class="cat-list">
+
+
+									{%for item in items %}
+									<li><a href="{{url_for('viewDetails', item_id=item.id)}}">{{item.name}}</a></li>
+									{% endfor %}
+
+
+								</ul>
+
+							</div>
+						</div>
+
+					</div><!-- category column end -->
+
+
+
+
+
+
+				</div>
+			</div>
+			</div><!-- section container end -->
+		</section>
+
+			<!--================================ FOOTER AREA ==========================================-->
+
+		<footer class="footer style-1 padding-top-60 bg222">
+			<div class="container">
+				<div class="footer-main padding-bottom-10">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-30">
+							<div class="footer-widget-title">
+								<h5>ABOUT</h5>
+							</div>
+							<div class="footer-logo">
+								<a href="#"><img src="images/footer-logo.png" alt="footer logo"></a>
+							</div>
+							<div class="footer-intro">
+								<p>This is an item catalog web application that serves as sport directory listing
+								</p>
+								<a href="https://github.com/Ijebusoma">read more</a>
+							</div>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-12 margin-bottom-30">
+							<div class="footer-widget-title">
+								<h5>recent posts</h5>
+							</div>
+							<div class="footer-recent-post-widget">
+								<div class="footer-recent-post clearfix">
+									<div class="footer-recent-post-figure">
+										<img src="" alt="recent post"/>
+									</div>
+									<div class="footer-recent-post-content">
+										<div class="footer-recent-post-title">
+											<a href="#">Sporta</a>
+										</div>
+										<div class="footer-recent-post-disc">
+											<p>Welcome to Sporta</p>
+										</div>
+										<div class="footer-recent-post-caption">
+											<p class="date">07 Sep, 2015</p>
+										</div>
+									</div>
+								</div>
+								<div class="footer-recent-post clearfix">
+									<div class="footer-recent-post-figure">
+										<img src="images/news/thumb/100/01.jpg" alt="recent post"/>
+									</div>
+									<div class="footer-recent-post-content">
+										<div class="footer-recent-post-title">
+											<a href="#">How to use our Cool Directory</a>
+										</div>
+										<div class="footer-recent-post-disc">
+											<p>SportLog listing</p>
+										</div>
+										<div class="footer-recent-post-caption">
+											<p class="date">07 Sep, 2015</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div><!-- .container end -->
+			<div class="footer-bottom">
+				<div class="container">
+					<div class="row clearfix">
+						<div class="col-md-8 col-sm-12 col-xs-12 pull-right margin-bottom-20">
+
+						</div>
+						<div class="col-md-4 col-sm-12 col-xs-12 pull-left margin-bottom-20">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<!--================================MODAL WINDOWS FOR REGISTER AND LOGIN FORMS ===========================================-->
+	<!-- Modal login form
+	<div class = "modal fade" id = "login" tabindex = "-1" role = "dialog" aria-labelledby = "myModalLabel" aria-hidden = "true">
+	   <div class = "listing-modal-1 modal-dialog">
+		  <div class = "modal-content">
+			 <div class = "modal-header">
+				<button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;</button>
+				<h4 class = "modal-title" id = "myModalLabel"> LOGIN</h4>
+			 </div>
+			 <div class = "modal-body">
+				<div class=" listing-login-form">
+					<form action="#">
+						<div class="listing-form-field">
+							<i class="fa fa-user blue-1"></i>
+							<input class="form-field bgwhite" type="text" name="user_name" placeholder="username" />
+						</div>
+						<div class="listing-form-field">
+							<i class="fa fa-lock blue-1"></i>
+							<input class="form-field bgwhite" type="password" name="user_pass" placeholder="password"  />
+						</div>
+						<div class="listing-form-field clearfix margin-top-20 margin-bottom-20">
+							<input type="checkbox" id="checkbox-1-1" class="regular-checkbox" /><label for="checkbox-1-1"></label>
+							<label class="checkbox-lable">Remember me</label>
+							<a href="#">forgot password?</a>
+						</div>
+						<div class="listing-form-field">
+							<input class="form-field submit bgblue-1" type="submit"  value="login" />
+						</div>
+					</form>
+					<div class="bottom-links">
+						<p>not a member?<a href="#">create account</a></p>
+					</div>
+				</div>
+			 </div>
+		  </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+		<!-- Modal login form -->
+	<div class = "modal fade" id = "socio" tabindex = "-1" role = "dialog" aria-labelledby = "myModalLabel" aria-hidden = "true">
+	   <div class = "listing-modal-1 modal-dialog">
+		  <div class = "modal-content">
+			 <div class = "modal-header">
+				<button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;</button>
+				<h4 class = "modal-title" id = "">Login</h4>
+			 </div>
+
+						<p>Login with social network(Only Google is currently supported)</p>
+						<div class="listing-form-social">
+							<ul>
+								<li><a class=" bgblue-4 white" href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a class=" bgblue-1 white" href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a class=" bgred-2 white" href="{{url_for('showLogin')}}"><i class="fa fa-google-plus"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			 </div>
+		  </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+	<!-- Modal registration form
+	<div class = "modal fade" id = "register" tabindex = "-1" role = "dialog" aria-labelledby = "myModalLabel" aria-hidden = "true">
+	   <div class = "listing-modal-1 modal-dialog">
+		  <div class = "modal-content">
+			 <div class = "modal-header">
+				<button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;</button>
+				<h4 class = "modal-title" id = "myModalLabel2">registration</h4>
+			 </div>
+			 <div class = "modal-body">
+				<div class=" listing-register-form">
+					<form action="#">
+						<div class="listing-form-field">
+							<input class="form-field bgwhite" type="text" name="user_name" placeholder="name"  />
+						</div>
+						<div class="listing-form-field">
+							<input class="form-field bgwhite" type="email" name="user_email" placeholder="email" />
+						</div>
+						<div class="listing-form-field">
+							<input class="form-field bgwhite" type="password" name="user_password" placeholder="password"  />
+						</div>
+						<div class="listing-form-field">
+							<input class="form-field bgwhite" type="password" name="user_confirm_password" placeholder="confirm password" />
+						</div>
+						<div class="listing-form-field clearfix margin-top-20 margin-bottom-20">
+							<input type="checkbox" id="checkbox-1-2" class="regular-checkbox" /><label for="checkbox-1-2"></label>
+							<label class="checkbox-lable">i agree with</label>
+							<a href="#">terms & conditions</a>
+						</div>
+						<div class="listing-form-field">
+							<input class="form-field submit bgblue-1" type="submit"  value="create account" />
+						</div>
+					</form>
+					<div class="bottom-links">
+						<p>login with social network</p>
+						<div class="listing-form-social">
+							<ul>
+								<li><a class=" bgblue-4 white" href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a class=" bgblue-1 white" href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a class=" bgred-2 white" href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			 </div>
+		  </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--================================JQuery===========================================-->
+
+	<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.11.3.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/jquery.js')}}"></script><!-- jquery 1.11.2 -->
+	<script src="{{url_for('static', filename='js/jquery.easing.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/modernizr.custom.js')}}"></script>
+
+	<!--================================BOOTSTRAP===========================================-->
+
+	<script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+
+	<!--================================NAVIGATION===========================================-->
+
+	<script type="text/javascript" src="{{url_for('static', filename='js/menu.js')}}"></script>
+
+
+
+	<!--================================OWL CARESOUL=============================================-->
+
+	<script src="{{url_for('static', filename='js/owl.carousel.js')}}"></script>
+    <script src="{{url_for('static', filename='js/triger.js')}}" type="text/javascript"></script>
+
+	<!--================================FunFacts Counter===========================================-->
+
+	<script src="js/jquery.countTo.js"></script>
+
+	<!--================================jquery cycle2=============================================-->
+
+	<script src="js/jquery.cycle2.min.js" type="text/javascript"></script>
+
+	<!--================================waypoint===========================================-->
+
+	<script type="text/javascript" src="js/jquery.waypoints.min.js"></script><!-- Countdown JS FILE -->
+
+	<!--================================RATINGS===========================================-->
+
+	<script src="js/jquery.raty-fa.js"></script>
+	<script src="js/rate.js"></script>
+
+	<!--================================ testimonial ===========================================-->
+	<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">
+
+			<div class="rg-image-wrapper">
+				<div class="rg-image"></div>
+				<div class="rg-caption-wrapper">
+					<div class="rg-caption" style="display:none;">
+						<p></p>
+						<h5></h5>
+						<div class="caption-metas">
+							<p class="position"></p>
+							<p class="orgnization"></p>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</script>
+	<script type="text/javascript" src="{{url_for('static', filename='assets/testimonial/js/jquery.tmpl.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='assets/testimonial/js/jquery.elastislide.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='assets/testimonial/js/gallery.js')}}"></script>
+
+	<!--================================custom script===========================================-->
+
+	<script type="text/javascript" src="{{url_for('static', filename='js/custom.js')}}"></script>
+
+</body>
+</html>

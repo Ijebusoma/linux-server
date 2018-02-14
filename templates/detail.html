@@ -1,0 +1,41 @@
+{% include "header.html" %}
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+<div class="container" style="background-color:#FFF;">
+
+	<div class="row">
+		<div class="col-md-6 padding-top-10">
+			<h2></h2>
+            <h5>{{ item.name }} | {{ item.category.name }}</h5>
+            <p>{{ item.description }}</p>
+			<br>
+		</div>
+		{% if 'username' in session %}
+		<div class="col-md-1 padding-top-10">
+			<a href = "{{url_for('editItem', item_id=item.id)}}">
+					<button class="btn btn-default">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                    </button>
+				</a>
+		</div>
+		<div class="col-md-1 padding-top-10">
+			<a href = "{{url_for('deleteItem', item_id=item.id)}}">
+					<button class="btn btn-default">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                    </button>
+				</a>
+		</div>
+		{% endif %}
+	</div>
+</div>
