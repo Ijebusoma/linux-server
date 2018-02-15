@@ -88,9 +88,13 @@ Install Postgresql : ```sudo apt-get install postgresql postgresql-contrib```
 P.S: The "contrib" flag just adds additional utilites.
 
 When prompted:
+
 n for super user
+
 y for creating databases and other prompts
+
 db-password for password
+
 Exit postgres account with: ```exit```
 
 *Install and Configure Git*
