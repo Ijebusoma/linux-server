@@ -20,7 +20,7 @@ SSH keys are generally more secure than password login. [Details here.](https://
 * Generate an ssh-key pair on your local machine with ```ssh-keygen```
 * Upload the public key to the ~/.ssh/authorized_keys file
 
-Login on your local machine as grader with: ``` sudo ssh -i ~/.ssh/<your-private-key>.pem grader@35.178.28.147```
+Login on your local machine as grader with: ``` sudo ssh -i ~/.ssh/<your-private-key>.pem grader@35.178.28.147 -p 2200```
 
 Set timezone: ```sudo timedatectl set-timezone UTC```
 
