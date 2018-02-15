@@ -13,38 +13,45 @@ The app can be accessed from http://35.178.28.147 || http://ec2-35-178-28-147.eu
 
 P.S: If you already are on a Linux OS, the last 3 requirements are optional.
 
-##The Setup Process
+## The Setup Process
 
 #### SETUP SSH KEYS
 SSH keys are generally more secure than password login. [Details here.](https://www.e2enetworks.com/help/knowledge-base/why-key-based-ssh-is-secure-than-password-based-access/)
-* Generate an ssh-key pair on your local machine with ssh-keygen
+* Generate an ssh-key pair on your local machine with ```ssh-keygen```
 * Upload the public key to the ~/.ssh/authorized_keys file
 
-Login on your local machine as grader with sudo ssh -i ~/.ssh/<your-private-key>.pem grader@35.178.28.147
+Login on your local machine as grader with: ``` sudo ssh -i ~/.ssh/<your-private-key>.pem grader@35.178.28.147```
 
-Set timezone sudo timedatectl set-timezone UTC
+Set timezone: ```sudo timedatectl set-timezone UTC```
 
-Verify timezone with timedatectl
+Verify timezone with ```timedatectl```
 
 ### SET UP UFW FIREWALL
+```
 sudo ufw default deny incoming
 sudo ufw allow 2200/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 123/tcp
 sudo ufw allow www
 sudo ufw allow ssh
+```
 
-Type sudo nano /etc/hosts, add newline underneath localhost line and write <your-public-ip>:ubuntu
-Install Apache2 for the instance with: sudo apt-get install apache2
-Check that Apache2 is loaded at the Static/Public IP, hit your browser with <your-public-ip>. It should show the ubuntu homepage.
-Install mod-wsgi to allow you to run wsgi files: sudo apt-get install libapache2-mod-wsgi
+* Type ```sudo nano /etc/hosts,``` add newline underneath localhost line and write <your-public-ip>:ubuntu
+
+* Install Apache2 for the instance with: ```sudo apt-get install apache2```
+
+* Check that Apache2 is loaded at the Static/Public IP, hit your browser with <your-public-ip>. It should show the ubuntu homepage.
+
+* Install mod-wsgi to allow you to run wsgi files: ```sudo apt-get install libapache2-mod-wsgi```
 
 ### Create Configuration Files
 The config files is checked first when a request is made. It's like the usher into your application. It hands over control to your wsgi file which then hands control to your application.
-Go to the sites-enabled directory in apache2:
-cd /etc/apache2/sites-enabled/
 
-Create and edit the 000-default.conf file: sudo nano 000-default.conf
+Go to the sites-enabled directory in apache2:
+cd ```/etc/apache2/sites-enabled/```
+
+Create and edit the 000-default.conf file: ```sudo nano 000-default.conf```
+
 Add in the following line before : WSGIScriptAlias ``` / /var/www/html/myapp.wsgi```
 
 
@@ -75,6 +82,7 @@ Create a ```catalog.conf``` file and add the contents and edit the addresses to 
 
 
 Restart Apache: ```sudo apache2ctl restart```
+
 Install Postgresql : ```sudo apt-get install postgresql postgresql-contrib``` 
 
 P.S: The "contrib" flag just adds additional utilites.
@@ -102,12 +110,16 @@ Clone repository into instance: ```sudo git clone https://github.com/<your-aweso
 
 ### SETUP POSTGRESQL DATABASE
 Type ```sudo su postgres```
-Move to the var/www/catalog/catalog directory: cd var/www/catalog/catalog
+Move to the var/www/catalog/catalog directory: ```cd var/www/catalog/catalog```
+
 Enter psql with: psql
-Type CREATE USER catalog;
-Next type CREATE DATABASE catalogapp OWNER catalog
+
+Type ```CREATE USER catalog;```
+Next type ```CREATE DATABASE catalogapp OWNER catalog```
 Also do not forget to replace the line in your app.py file like so:
-```engine = create_engine('postgresql://catalogapp:password@localhost/catalog')
+
+```
+engine = create_engine('postgresql://catalogapp:password@localhost/catalog')
 Base.metadata.bind = engine
 ```
 
@@ -118,7 +130,7 @@ Refer to these postgresql docs if you get stuck:
 * https://www.postgresql.org/docs/9.1/static/app-createdb.html
 
 
-type \q to leave psql and exit to go back to your home directory.
+type ```\q``` to leave psql area and exit to go back to your home directory.
 
 Install necessary packages your flask app need to function:
 ```
